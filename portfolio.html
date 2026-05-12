@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narala Gowri Padmavathi | Python Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2040;
+    --navy-mid: #1a3560;
+    --navy-light: #2a4a7f;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #faf8f3;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a5568;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(15,32,64,0.10);
+    --shadow-hover: 0 8px 36px rgba(15,32,64,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.7; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,32,64,0.97); backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 64px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.1rem; font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 100px 5% 80px; position: relative; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: rgba(201,168,76,0.06); pointer-events: none; }
+  .hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 350px; height: 350px; border-radius: 50%; background: rgba(201,168,76,0.04); pointer-events: none; }
+
+  .hero-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px; margin-bottom: 1.2rem; }
+  .hero-badge span { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 0.4rem; }
+  .hero-title { font-size: 1.1rem; color: var(--gold); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 1.2rem; }
+  .hero-desc { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 520px; margin-bottom: 2rem; line-height: 1.8; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary { background: var(--gold); color: var(--navy); padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline { border: 1.5px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+  .hero-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 2rem; backdrop-filter: blur(8px); }
+  .avatar-circle { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, #8b6914 100%); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--navy); margin: 0 auto 1.5rem; box-shadow: 0 0 0 4px rgba(201,168,76,0.2); }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+  .stat-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem; text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold); display: block; }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; margin-top: 2px; }
+  .hero-info { display: flex; flex-direction: column; gap: 0.6rem; }
+  .info-row { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.65); font-size: 0.85rem; }
+  .info-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  /* SECTIONS */
+  .section { padding: 80px 5%; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.75rem; font-weight: 600; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .section-line { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 2.5rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { color: var(--text-mid); line-height: 1.85; margin-bottom: 1rem; font-size: 0.97rem; }
+  .about-text strong { color: var(--navy); }
+  .highlight-box { background: var(--navy); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+  .highlight-box p { color: rgba(255,255,255,0.75) !important; font-size: 0.9rem !important; font-style: italic; margin: 0 !important; }
+  .highlight-box strong { color: var(--gold) !important; font-style: normal; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+  .highlight-item { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 1.1rem 1.2rem; box-shadow: var(--shadow); }
+  .highlight-item h4 { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .highlight-item p { font-size: 0.82rem; color: var(--text-light); margin: 0; }
+
+  /* SKILLS */
+  .skills-bg { background: var(--white); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: box-shadow 0.2s, transform 0.2s; }
+  .skill-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .skill-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; }
+  .skill-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .skill-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--navy); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: var(--white); border: 1px solid var(--border); color: var(--text-mid); padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 500; }
+  .tag.primary { background: rgba(15,32,64,0.06); border-color: rgba(15,32,64,0.15); color: var(--navy); }
+
+  /* EXPERIENCE */
+  .exp-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(to bottom, var(--gold), var(--navy-light)); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-role { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--navy); }
+  .exp-badge { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: #8b6914; padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+  .exp-company { color: var(--gold); font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .exp-meta { color: var(--text-light); font-size: 0.83rem; margin-bottom: 1.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .exp-desc { color: var(--text-mid); font-size: 0.92rem; margin-bottom: 1.2rem; line-height: 1.8; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-points li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-mid); font-size: 0.88rem; line-height: 1.6; }
+  .exp-points li::before { content: '▸'; color: var(--gold); flex-shrink: 0; margin-top: 1px; font-size: 0.8rem; }
+  .tech-used { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.2rem; }
+  .tech-chip { background: var(--navy); color: rgba(255,255,255,0.85); padding: 4px 12px; border-radius: 6px; font-size: 0.76rem; font-weight: 500; }
+
+  /* PROJECTS */
+  .projects-bg { background: var(--white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--cream); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+  .project-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+  .project-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: rgba(15,32,64,0.07); line-height: 1; margin-bottom: 0.5rem; }
+  .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+  .project-card p { color: var(--text-mid); font-size: 0.88rem; line-height: 1.7; flex: 1; margin-bottom: 1.2rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); text-decoration: none; font-size: 0.8rem; font-weight: 600; margin-top: 1rem; transition: gap 0.2s; }
+  .project-link:hover { gap: 10px; }
+
+  /* EDUCATION */
+  .edu-section-grid { display: flex; flex-direction: column; gap: 1.2rem; }
+  .edu-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 2rem; box-shadow: var(--shadow); display: flex; align-items: flex-start; gap: 1.5rem; }
+  .edu-icon { width: 54px; height: 54px; border-radius: 12px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+  .edu-school { color: var(--gold); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+  .edu-year { color: var(--text-light); font-size: 0.82rem; }
+  .edu-note { font-size: 0.8rem; color: var(--text-mid); margin-top: 4px; }
+
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .cert-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 10px; transition: box-shadow 0.2s; }
+  .cert-card:hover { box-shadow: var(--shadow-hover); }
+  .cert-logo { font-size: 1.3rem; }
+  .cert-name { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+  .cert-issuer { font-size: 0.75rem; color: var(--text-light); }
+
+  /* CONTACT */
+  .contact-bg { background: var(--navy); }
+  .contact-bg .section-title { color: var(--white); }
+  .contact-bg .section-label { color: var(--gold); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-intro { color: rgba(255,255,255,0.65); font-size: 0.97rem; line-height: 1.85; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-link { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; padding: 0.8rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; transition: background 0.2s, color 0.2s; }
+  .contact-link:hover { background: rgba(201,168,76,0.1); color: var(--gold); border-color: rgba(201,168,76,0.3); }
+  .contact-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(201,168,76,0.15); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .status-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 2rem; }
+  .status-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; }
+  .status-dot { width: 10px; height: 10px; background: #48bb78; border-radius: 50%; box-shadow: 0 0 0 3px rgba(72,187,120,0.25); animation: pulse 2s infinite; }
+  .status-title { color: var(--white); font-weight: 600; font-size: 0.95rem; }
+  .status-items { display: flex; flex-direction: column; gap: 0.7rem; }
+  .status-item { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.65); font-size: 0.88rem; }
+  .status-item::before { content: '✓'; color: var(--gold); font-size: 0.85rem; }
+
+  footer { background: #07152d; padding: 1.5rem 5%; text-align: center; color: rgba(255,255,255,0.35); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  footer span { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    .hero-content, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero-card { display: none; }
+    .section { padding: 60px 4%; }
+    .nav-links { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NGP.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge"><span></span> Open to Work · Immediate Joiner</div>
+      <h1>Narala Gowri<br>Padmavathi</h1>
+      <div class="hero-title">Python Developer · Django & Flask · REST APIs · SQL</div>
+      <p class="hero-desc">Motivated Python Developer with hands-on experience building backend applications, REST APIs, and database-driven systems. Skilled in Python, Django, MySQL, HTML/CSS/JavaScript, and OOP — eager to contribute to business-critical projects in a growth-driven software environment.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Hire Me</a>
+        <a href="#projects" class="btn-outline">View Projects</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="avatar-circle">NGP</div>
+      <div class="hero-info">
+        <div class="info-row"><div class="info-dot"></div> Python Developer</div>
+        <div class="info-row"><div class="info-dot"></div> Hyderabad, Telangana</div>
+        <div class="info-row"><div class="info-dot"></div> gowripadmavathi111@gmail.com</div>
+        <div class="info-row"><div class="info-dot"></div> +91 9014113661</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-box"><span class="stat-num">1</span><span class="stat-label">Internship</span></div>
+        <div class="stat-box"><span class="stat-num">2</span><span class="stat-label">Projects</span></div>
+        <div class="stat-box"><span class="stat-num">8.3</span><span class="stat-label">CGPA</span></div>
+        <div class="stat-box"><span class="stat-num">3</span><span class="stat-label">Certifications</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am <strong>Narala Gowri Padmavathi</strong>, a Python Developer from Hyderabad, Telangana. I hold a B.Tech in Electrical & Electronics Engineering with a Minor in Computer Science (CGPA: 8.3) from Godavari Institute of Engineering & Technology.</p>
+        <p>I specialize in backend development using Python and Flask — building RESTful APIs, designing normalized MySQL databases with foreign key relationships, implementing full CRUD operations, and validating APIs with Postman. I write clean, modular code following OOP principles with strong exception handling.</p>
+        <p>I completed my Python Developer Internship at <strong>Social Tek</strong> (Sep 2025), working on backend scripts, RESTful API integrations, and data preprocessing pipelines. I am currently upskilling in Django (advanced), AWS, and microservices.</p>
+        <div class="highlight-box">
+          <p><strong>"Eager to contribute to business-critical projects in a growth-driven software environment."</strong> I bring Python expertise, clean code habits, and a passion for solving real problems through backend engineering.</p>
+        </div>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <h4>🐍 Core Strength</h4>
+          <p>Python backend development — Flask REST APIs, MySQL with joins & foreign keys, OOP, exception handling, and Postman-based API testing.</p>
+        </div>
+        <div class="highlight-item">
+          <h4>💼 Internship · Social Tek</h4>
+          <p>Python Developer Intern (Sep 2025) — built backend scripts, RESTful API integrations, and data processing pipelines using Python, Flask & MySQL.</p>
+        </div>
+        <div class="highlight-item">
+          <h4>🎓 Education · CGPA 8.3</h4>
+          <p>B.Tech EEE with Minor in CS — Python, DBMS, OOP, Data Structures. Godavari Institute of Engineering & Technology, 2022–2025.</p>
+        </div>
+        <div class="highlight-item">
+          <h4>🔍 Seeking · Immediate Joiner</h4>
+          <p>Entry-level / Junior Python Developer or Backend Developer roles. Open to on-site, hybrid, and remote positions across India.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section skills-bg" id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">What I Work With</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🐍</div>
+          <h3>Languages & Frameworks</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag primary">Python</span>
+          <span class="tag primary">Django</span>
+          <span class="tag primary">Flask</span>
+          <span class="tag primary">REST API</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🗄️</div>
+          <h3>Database</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag primary">MySQL</span>
+          <span class="tag primary">SQLite</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">DDL / DML</span>
+          <span class="tag">SQL Joins</span>
+          <span class="tag">Foreign Keys</span>
+          <span class="tag">Subqueries</span>
+          <span class="tag">Parameterized Queries</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🧱</div>
+          <h3>OOP & Engineering</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag primary">Classes & Objects</span>
+          <span class="tag primary">Inheritance</span>
+          <span class="tag">Encapsulation</span>
+          <span class="tag">Exception Handling</span>
+          <span class="tag">Clean Code</span>
+          <span class="tag">Modular Design</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">📊</div>
+          <h3>Data Libraries</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag primary">Pandas</span>
+          <span class="tag primary">NumPy</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+          <span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🛠️</div>
+          <h3>Tools & Platforms</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag primary">Postman</span>
+          <span class="tag primary">Git / GitHub</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Jupyter Notebook</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">MS Excel (Advanced)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🚀</div>
+          <h3>Currently Learning</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag primary">Django (Advanced Features)</span>
+          <span class="tag">AWS Fundamentals</span>
+          <span class="tag">Microservices</span>
+          <span class="tag">Cloud Computing</span>
+          <span class="tag">AI / ML Applications</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Internship</h2>
+    <div class="section-line"></div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Python Developer Intern</div>
+          <div class="exp-company">Social Tek</div>
+          <div class="exp-meta">
+            <span>📅 September 2025</span>
+            <span>📍 Hyderabad, Telangana</span>
+          </div>
+        </div>
+        <div class="exp-badge">Completed</div>
+      </div>
+      <p class="exp-desc">Worked as a Python Developer intern building backend scripts, RESTful API integrations, and data processing pipelines. Wrote clean, modular Python code following OOP principles and collaborated with the team on debugging and documentation.</p>
+      <ul class="exp-points">
+        <li>Developed and maintained Python-based backend scripts and automation tools to support internal workflows and data processing pipelines.</li>
+        <li>Built and tested RESTful API integrations using Python (Requests library), handling data ingestion, transformation, and output formatting.</li>
+        <li>Designed and queried MySQL databases using joins, foreign keys, and parameterized queries to maintain data integrity.</li>
+        <li>Wrote clean, modular Python code following OOP principles — reusable utility modules with proper exception handling.</li>
+        <li>Tested and validated all API endpoints using Postman to verify correct request-response behavior before handoff.</li>
+        <li>Collaborated with the team to debug, optimize, and document Python scripts for improved performance and maintainability.</li>
+      </ul>
+      <div class="tech-used">
+        <span class="tech-chip">Python</span>
+        <span class="tech-chip">Flask</span>
+        <span class="tech-chip">MySQL</span>
+        <span class="tech-chip">REST APIs</span>
+        <span class="tech-chip">Postman</span>
+        <span class="tech-chip">Pandas</span>
+        <span class="tech-chip">NumPy</span>
+        <span class="tech-chip">Git</span>
+        <span class="tech-chip">OOP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section projects-bg" id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">What I've Built</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-number">01</div>
+        <h3>Furniture & Woodwork Business Management System</h3>
+        <p style="margin-bottom: 0.8rem; font-size:0.82rem; color:var(--gold); font-weight:600;">Full-Stack Web Application &nbsp;·&nbsp; Python | Django | SQLite | HTML | CSS | Bootstrap | Whitenoise</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.2rem;">
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Designed and developed a full-stack business management web application for a furniture/woodwork company using Django 5.1 with SQLite as the backend database.</li>
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Built an Orders model using Django ORM to capture customer booking details — name, email, mobile, service type, budget, and notes — with data integrity enforced via field-level constraints.</li>
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Configured 11-route URL dispatcher covering Home, About, Services, Projects, Quote, Booking, Contact, and Error pages, plus user authentication flows (login, signup, logout) using Django's built-in auth system.</li>
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Developed a responsive frontend using HTML, CSS, and Bootstrap with a carousel-based homepage, portfolio image gallery, and an order/quote form connected to the Django backend.</li>
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Integrated Whitenoise middleware for efficient static file serving and registered the Orders model with Django Admin for easy order management.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag primary">Python</span>
+          <span class="tag primary">Django 5.1</span>
+          <span class="tag primary">SQLite</span>
+          <span class="tag">Django ORM</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Whitenoise</span>
+          <span class="tag">Django Auth</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">02</div>
+        <h3>Student Performance Analysis & Prediction Dashboard</h3>
+        <p style="margin-bottom: 0.8rem; font-size:0.82rem; color:var(--gold); font-weight:600;">Personal Project &nbsp;·&nbsp; Python | Pandas | NumPy | Scikit-learn | Power BI</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.2rem;">
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Performed end-to-end EDA using Python (Pandas, NumPy) to identify key correlations between lifestyle factors and academic outcomes.</li>
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Applied feature engineering — encoding, normalization, class imbalance handling — and built classification models (Logistic Regression, Decision Tree).</li>
+          <li style="display:flex;gap:8px;font-size:0.85rem;color:#4a5568;line-height:1.6;"><span style="color:#c9a84c;flex-shrink:0;">▸</span> Developed an interactive Power BI dashboard to visualize predictions and trends for end-user insight delivery.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag primary">Python</span>
+          <span class="tag primary">Pandas</span>
+          <span class="tag primary">Scikit-learn</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">EDA</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">Decision Tree</span>
+        </div>
+        <a href="https://github.com/gowripadmavathi/Student-Depression-Prediction" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="section-inner">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="section-line"></div>
+    <div class="edu-section-grid">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">B.Tech – Electrical & Electronics Engineering</div>
+          <div class="edu-school">Godavari Institute of Engineering & Technology</div>
+          <div class="edu-year">📅 2022 – 2025</div>
+          <div class="edu-note">CGPA: 8.3 &nbsp;·&nbsp; Minor in Computer Science — Python, DBMS, Data Structures, OOP</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">📘</div>
+        <div>
+          <div class="edu-degree">Diploma – Electrical & Electronics Engineering</div>
+          <div class="edu-school">GIET Polytechnic College</div>
+          <div class="edu-year">📅 2019 – 2022</div>
+          <div class="edu-note">Percentage: 80%</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <div class="section-label" style="margin-bottom: 1rem;">Certifications</div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-logo">🟢</div>
+          <div><div class="cert-name">Python (Basics)</div><div class="cert-issuer">HackerRank</div></div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-logo">🟢</div>
+          <div><div class="cert-name">Problem Solving (Basic)</div><div class="cert-issuer">HackerRank</div></div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-logo">🟢</div>
+          <div><div class="cert-name">SQL (Basics)</div><div class="cert-issuer">HackerRank</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-bg" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">I am actively looking for Python Developer and Backend Developer roles — junior, trainee, or entry-level positions. I am an immediate joiner, open to on-site, hybrid, and remote opportunities across India. Feel free to reach out!</p>
+        <div class="contact-links">
+          <a href="mailto:gowripadmavathi111@gmail.com" class="contact-link">
+            <div class="contact-icon">📧</div>
+            <span>gowripadmavathi111@gmail.com</span>
+          </a>
+          <a href="tel:+919014113661" class="contact-link">
+            <div class="contact-icon">📱</div>
+            <span>+91 9014113661</span>
+          </a>
+          <a href="https://github.com/gowripadmavathi/Student-Depression-Prediction" target="_blank" class="contact-link">
+            <div class="contact-icon">🐙</div>
+            <span>github.com/gowripadmavathi</span>
+          </a>
+          <a href="https://linkedin.com/in/your-profile" target="_blank" class="contact-link">
+            <div class="contact-icon">💼</div>
+            <span>LinkedIn Profile (add your URL)</span>
+          </a>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-header">
+          <div class="status-dot"></div>
+          <div class="status-title">Available for Opportunities</div>
+        </div>
+        <div class="status-items">
+          <div class="status-item">Python Developer — entry level / junior</div>
+          <div class="status-item">Backend Developer (Flask / Django)</div>
+          <div class="status-item">On-site, hybrid & remote considered</div>
+          <div class="status-item">Immediate joiner · Hyderabad, Telangana</div>
+          <div class="status-item">English & Telugu speaker</div>
+          <div class="status-item">CGPA 8.3 · 3× HackerRank certified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Narala Gowri Padmavathi</span> · Python Developer · Hyderabad, Telangana</p>
+</footer>
+
+</body>
+</html>
